@@ -140,3 +140,62 @@ public class UnitTestSuite {}
 
 ### 使用Firebase Test Lab运行测试
 
+使用[Firebase Test Lab](https://firebase.google.cn/docs/test-lab/),您可以针对主流的不同Android设备和不同的设置(区域设置,方向,屏幕尺寸和平台版本)进行测试.这些测试运行在Google数据中心的物理和虚拟设备上.您可以直接从Android Studio中直接部署应用程序到测试实验室或者通过命令行完成这一点.测试实验室将提供测试日志,该日志包含任何导致测试失败的细节.
+
+要使用Firebase测试实验室,您需要执行如下操作.如果您已经拥有了Google账号和Firebase项目,则请忽略:
+
+1. 如果您还没有Google账号,则请[创建一个Google账号](https://accounts.google.com/);
+
+2. 在[Firebase console](https://console.firebase.google.com/)中,点击**Create New Project**.
+
+   在[Spark Plan的每日免费限额](https://firebase.google.cn/docs/test-lab/overview#quota_for_spark_and_flame_plans)中通过测试实验室测试您的应用程序并不需要任何费用.
+
+#### 配置测试矩阵并执行测试
+
+Android Studio提供了集成工具,允许您将测试程序部署到Firebase测试实验室中.在您通过Blaze计费方式创建了Firebase项目后,您就可以创建测试程序并执行:
+
+1. 在主菜单中点击**Run** > **Edit Configurations**;
+
+2. 点击**Add New Configuration** ![img](https://developer.android.google.cn/studio/images/buttons/ic_plus.png)并且选择**Android Tests**;
+
+3. 在Android Test配置对话框中,可执行如下操作:
+
+   a. 输入或者选择要执行的测试的详细信息;例如测试名称,模块的类型,测试的类型和要测试的类;
+
+   b. 从**Deployment Target Options**的**Target**下拉菜单中,选择**Firebase Test Lab Device Matrix**;
+
+   c. 如果您尚未登录,请点击**Connect to Google Cloud Platform**,并允许Android Studio访问您的账号;
+
+   d. 点击*Cloud Project*旁边的![img](https://developer.android.google.cn/images/tools/as-wrench.png)按钮,并从列表中选择您的Firebase项目.
+
+4. 创建并配置测试矩阵:
+
+   a. 点击*Matrix Configuration*下拉菜单旁边的click **Open Dialog** ![img](https://developer.android.google.cn/images/tools/as-launchavdm.png);
+
+   b. 点击**Add New Configuration (+)**;
+
+   c. 在**Name**输入框中,为您的配置输入一个名称;
+
+   d. 选择您测试应用时需要使用的设备,Android版本,区域设置和屏幕方向.Firebase测试实验室将根据您的选择进行测试并且声称测试报告;
+
+   e. 点击**OK**来保存您的设置.
+
+5. 点击**OK**来退出*Run/Debug*配置对话框;
+
+6. 点击**Run** ![img](https://developer.android.google.cn/images/tools/as-run.png)来运行您的测试.
+
+![img](https://developer.android.google.cn/images/training/ctl-config.png)
+
+**图1**,为Firebase测试实验室添加一个配置.
+
+#### 分析测试结果
+
+当Firebase测试实验室完成测试时,*Run*窗口会打开并显示测试结果,如图2所示.您可能需要点击**Show Passed** ![img](https://developer.android.google.cn/images/tools/as-ok.png)来查看所有已执行的测试.
+
+![图2](https://developer.android.google.cn/images/training/ctl-test-results.png)
+
+**图2**,查看Firebase执行的Instrumented测试的结果.
+
+您也可以通过*Run*窗口中测试结果开头显示的链接来打开Web页面来进行结果的分析.
+
+要了解更多关于Web中查看结果的详细信息,请参阅[Analyze Firebase Test Lab for Android Results](https://firebase.google.cn/docs/test-lab/analyzing-results).
